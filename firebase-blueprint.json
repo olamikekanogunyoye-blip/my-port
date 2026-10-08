@@ -1,0 +1,193 @@
+{
+  "entities": {
+    "SiteSettings": {
+      "title": "SiteSettings",
+      "description": "Singleton configuration for the site owner and brand identity.",
+      "type": "object",
+      "properties": {
+        "ownerName": { "type": "string" },
+        "brandName": { "type": "string" },
+        "title": { "type": "string" },
+        "heroHeadline": { "type": "string" },
+        "heroIntro": { "type": "string" },
+        "heroImageUrl": { "type": "string" },
+        "heroImagePath": { "type": "string" },
+        "ctaPrimaryLabel": { "type": "string" },
+        "ctaSecondaryLabel": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "location": { "type": "string" },
+        "availabilityText": { "type": "string" },
+        "aboutHeading": { "type": "string" },
+        "aboutBody": { "type": "string" },
+        "aboutImageUrl": { "type": "string" },
+        "aboutImagePath": { "type": "string" },
+        "footerText": { "type": "string" },
+        "seoTitle": { "type": "string" },
+        "seoDescription": { "type": "string" },
+        "seoKeywords": { "type": "array" },
+        "seoImageUrl": { "type": "string" },
+        "seoImagePath": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["ownerName", "brandName", "title", "email"]
+    },
+    "ServiceItem": {
+      "title": "ServiceItem",
+      "description": "Creative or automation service offering.",
+      "type": "object",
+      "properties": {
+        "icon": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "order": { "type": "number" },
+        "published": { "type": "boolean" }
+      },
+      "required": ["icon", "title", "description", "order", "published"]
+    },
+    "CategoryItem": {
+      "title": "CategoryItem",
+      "description": "Taxonomy category for portfolio content filtering.",
+      "type": "object",
+      "properties": {
+        "label": { "type": "string" },
+        "slug": { "type": "string" },
+        "contentType": { "type": "string", "enum": ["video", "image", "writing", "automation"] },
+        "order": { "type": "number" },
+        "published": { "type": "boolean" }
+      },
+      "required": ["label", "slug", "contentType", "order", "published"]
+    },
+    "WorkItem": {
+      "title": "WorkItem",
+      "description": "Individual portfolio piece or automation case study.",
+      "type": "object",
+      "properties": {
+        "type": { "type": "string", "enum": ["video", "image", "writing", "automation"] },
+        "title": { "type": "string" },
+        "slug": { "type": "string" },
+        "description": { "type": "string" },
+        "categoryId": { "type": "string" },
+        "thumbnailUrl": { "type": "string" },
+        "thumbnailPath": { "type": "string" },
+        "mediaUrl": { "type": "string" },
+        "mediaPath": { "type": "string" },
+        "externalUrl": { "type": "string" },
+        "voiceUrl": { "type": "string" },
+        "voicePath": { "type": "string" },
+        "musicUrl": { "type": "string" },
+        "musicPath": { "type": "string" },
+        "writingKind": { "type": "string", "enum": ["video-script", "story", "blog", "other"] },
+        "content": { "type": "string" },
+        "tools": { "type": "array" },
+        "problem": { "type": "string" },
+        "solution": { "type": "string" },
+        "result": { "type": "string" },
+        "allowDownload": { "type": "boolean" },
+        "featured": { "type": "boolean" },
+        "isSample": { "type": "boolean" },
+        "order": { "type": "number" },
+        "published": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["type", "title", "slug", "order", "published"]
+    },
+    "SocialLinkItem": {
+      "title": "SocialLinkItem",
+      "description": "External social presence link.",
+      "type": "object",
+      "properties": {
+        "platform": { "type": "string" },
+        "label": { "type": "string" },
+        "url": { "type": "string" },
+        "order": { "type": "number" },
+        "published": { "type": "boolean" }
+      },
+      "required": ["platform", "label", "order", "published"]
+    },
+    "ContactMessage": {
+      "title": "ContactMessage",
+      "description": "Incoming client or project message.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 200 },
+        "subject": { "type": "string", "maxLength": 200 },
+        "message": { "type": "string", "maxLength": 5000 },
+        "read": { "type": "boolean" },
+        "archived": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "email", "subject", "message", "read", "archived", "createdAt"]
+    },
+    "Lead": {
+      "title": "Lead",
+      "description": "Captured client inquiry and project lead for CRM tracking.",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string", "maxLength": 150 },
+        "name": { "type": "string", "maxLength": 150 },
+        "email": { "type": "string", "maxLength": 200 },
+        "serviceInterest": { "type": "string", "maxLength": 200 },
+        "subject": { "type": "string", "maxLength": 200 },
+        "message": { "type": "string", "maxLength": 6000 },
+        "status": { "type": "string" },
+        "source": { "type": "string" },
+        "timeline": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "email", "serviceInterest", "message", "status", "source"]
+    },
+    "MediaAsset": {
+      "title": "MediaAsset",
+      "description": "Uploaded asset record in Firebase Storage.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "url": { "type": "string" },
+        "path": { "type": "string" },
+        "contentType": { "type": "string" },
+        "size": { "type": "number" },
+        "kind": { "type": "string", "enum": ["image", "video", "audio", "other"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "url", "path", "contentType", "size", "kind", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/settings/{doc}": {
+      "schema": "SiteSettings",
+      "description": "Singleton site settings and brand metadata"
+    },
+    "/services/{id}": {
+      "schema": "ServiceItem",
+      "description": "Offered creative and automation services"
+    },
+    "/categories/{id}": {
+      "schema": "CategoryItem",
+      "description": "Filterable portfolio taxonomy categories"
+    },
+    "/works/{id}": {
+      "schema": "WorkItem",
+      "description": "Portfolio work pieces and case studies"
+    },
+    "/socialLinks/{id}": {
+      "schema": "SocialLinkItem",
+      "description": "Curated social media channels"
+    },
+    "/messages/{id}": {
+      "schema": "ContactMessage",
+      "description": "Inbound client contact and project inquiries"
+    },
+    "/leads/{id}": {
+      "schema": "Lead",
+      "description": "Client lead capture entries from contact form"
+    },
+    "/media/{id}": {
+      "schema": "MediaAsset",
+      "description": "Metadata for uploaded storage files"
+    }
+  }
+}

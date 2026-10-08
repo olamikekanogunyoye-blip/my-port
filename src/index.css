@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@import "./styles/tokens.css";
+@import "./styles/global.css";
+
+@theme {
+  --color-ink: #0B0B0C;
+  --color-graphite: #151517;
+  --color-graphite-elevated: #1F1F24;
+  --color-bone: #F1EEE6;
+  --color-muted: #8A877F;
+  --color-brass: #C9A24D;
+  --color-brass-hover: #E3B95F;
+  --color-brass-dim: rgba(201, 162, 77, 0.15);
+  --color-line: rgba(241, 238, 230, 0.12);
+  --color-line-subtle: rgba(241, 238, 230, 0.06);
+
+  --font-sans: 'Inter Tight', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}

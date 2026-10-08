@@ -1,0 +1,70 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner() {
+      return isSignedIn()
+        && (request.auth.token.email == "davidolamilekan240@gmail.com" || request.auth.token.email == "olamilekanogunyoye@gmail.com")
+        && request.auth.token.email_verified == true;
+    }
+
+    match /settings/{doc} {
+      allow read: if true;
+      allow write: if isOwner();
+    }
+
+    match /services/{id} {
+      allow read: if resource.data.published == true || isOwner();
+      allow write: if isOwner();
+    }
+
+    match /categories/{id} {
+      allow read: if resource.data.published == true || isOwner();
+      allow write: if isOwner();
+    }
+
+    match /works/{id} {
+      allow read: if resource.data.published == true || isOwner();
+      allow write: if isOwner();
+    }
+
+    match /socialLinks/{id} {
+      allow read: if resource.data.published == true || isOwner();
+      allow write: if isOwner();
+    }
+
+    match /media/{id} {
+      allow read, write: if isOwner();
+    }
+
+    match /messages/{id} {
+      allow create: if request.resource.data.name is string && request.resource.data.name.size() <= 150
+        && request.resource.data.email is string && request.resource.data.email.size() <= 200
+        && request.resource.data.subject is string && request.resource.data.subject.size() <= 200
+        && request.resource.data.message is string && request.resource.data.message.size() <= 6000
+        && request.resource.data.read == false && request.resource.data.archived == false;
+      allow read, update, delete: if isOwner();
+    }
+
+    match /leads/{id} {
+      allow create: if request.resource.data.name is string && request.resource.data.name.size() <= 150
+        && request.resource.data.email is string && request.resource.data.email.size() <= 200
+        && request.resource.data.serviceInterest is string && request.resource.data.serviceInterest.size() <= 200
+        && request.resource.data.message is string && request.resource.data.message.size() <= 6000
+        && request.resource.data.status == 'new'
+        && request.resource.data.source is string;
+      allow read, update, delete: if isOwner();
+    }
+
+    match /test/{doc} {
+      allow read: if true;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

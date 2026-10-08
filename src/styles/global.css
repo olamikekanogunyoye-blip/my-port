@@ -1,0 +1,178 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+@import "./tokens.css";
+
+/* Base Body and Smooth Layout */
+html, body {
+  background-color: var(--ink);
+  color: var(--bone);
+  font-family: var(--font-sans);
+  min-height: 100svh;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Fluid Typography Helper Classes */
+.font-display {
+  font-family: var(--font-sans);
+  font-size: var(--text-display);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+}
+
+.font-h1 {
+  font-family: var(--font-sans);
+  font-size: var(--text-h1);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+.font-h2 {
+  font-family: var(--font-sans);
+  font-size: var(--text-h2);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.font-h3 {
+  font-family: var(--font-sans);
+  font-size: var(--text-h3);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.font-serif-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.font-mono-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Swiss 12-Column Grid */
+.swiss-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .swiss-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
+/* Hairline Rules */
+.hairline-b {
+  border-bottom: 1px solid var(--line);
+}
+
+.hairline-t {
+  border-top: 1px solid var(--line);
+}
+
+.hairline-r {
+  border-right: 1px solid var(--line);
+}
+
+.hairline-l {
+  border-left: 1px solid var(--line);
+}
+
+.hairline-box {
+  border: 1px solid var(--line);
+}
+
+/* Vignette Effect */
+.cinema-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, transparent 65%, rgba(0, 0, 0, 0.45) 100%);
+  z-index: 998;
+}
+
+/* Accessible Focus States */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px;
+}
+
+/* Minimum Tap Target */
+.tap-target {
+  min-height: var(--tap-target-min);
+  min-width: var(--tap-target-min);
+}
+
+/* Custom Film Noir Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ink);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(241, 238, 230, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brass);
+}
+
+/* Animations */
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes kenburns {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.08) translate3d(-1%, -1%, 0);
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Clip-Path Reveal for Cinematic Imagery */
+.clip-reveal {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  transition: clip-path 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.clip-reveal-hidden {
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+}
