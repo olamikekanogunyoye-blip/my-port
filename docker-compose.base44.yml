@@ -1,0 +1,46 @@
+# Base44 sandbox / dev environment for KEY OF DAVID.
+#
+# This repo is a pure client-side Vite + React SPA (Firebase Web SDK with a
+# localStorage fallback). There is no server process: `express` is listed in
+# package.json but no server entry point exists in the repository.
+#
+# The compose file runs Vite's dev server from the cloned source (bind mount),
+# so edits hot-reload without rebuilding an image.
+
+services:
+  web:
+    image: node:22
+    working_dir: /app
+    # Dependencies are installed on startup, after the bind mount is available.
+    # node_modules lives in a named volume so restarts reuse the install.
+    # --legacy-peer-deps: the repo has no lockfile, and its root `esbuild: ^0.25.0`
+    # devDependency conflicts with vite@8's peerOptional esbuild range. Vite ships
+    # its own esbuild, so the root copy is unused; legacy resolution is safe here.
+    command: ["sh", "-ec", "npm install --no-audit --no-fund --legacy-peer-deps && exec npm run dev"]
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app
+      - web_node_modules:/app/node_modules
+    environment:
+      - BASE44_PREVIEW_MODE
+      # Vite appends this to `server.allowedHosts` (Vite >= 6.1).
+      - __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS
+      # Bind mounts on macOS/Windows hosts often don't emit fs events; poll so HMR fires.
+      - CHOKIDAR_USEPOLLING=true
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "require('http').get('http://localhost:3000/',r=>process.exit(r.statusCode<500?0:1)).on('error',()=>process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 60s
+    restart: on-failure
+
+volumes:
+  web_node_modules:

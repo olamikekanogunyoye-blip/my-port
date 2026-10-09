@@ -76,12 +76,19 @@ export const firebaseConfig: FirebaseOptions = {
     DEFAULT_FIREBASE_CONFIG.measurementId,
 };
 
+// Base44 sandbox preview only: the committed Firebase project denies anonymous
+// Firestore reads, so run on the app's built-in localStorage store instead.
+// When BASE44_PREVIEW_MODE is unset or any other value, behavior is unchanged.
+const sandboxPreviewMode = env.BASE44_PREVIEW_MODE === '1';
+
 // Determine whether valid credentials exist
-export const isFirebaseConfigured: boolean = Boolean(
-  firebaseConfig.apiKey &&
-  firebaseConfig.projectId &&
-  firebaseConfig.apiKey.length > 5
-);
+export const isFirebaseConfigured: boolean =
+  !sandboxPreviewMode &&
+  Boolean(
+    firebaseConfig.apiKey &&
+    firebaseConfig.projectId &&
+    firebaseConfig.apiKey.length > 5
+  );
 
 // Optional custom firestore database identifier (e.g. provisioned database ID)
 const activeFirestoreDatabaseId: string | undefined =
