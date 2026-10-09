@@ -36,10 +36,7 @@ export const Footer: React.FC<FooterProps> = ({ settings, socialLinks = [] }) =>
 
   const handleScrollTo = (id: string) => {
     logAnalyticsEvent('navigate_section', { section: id, source: 'footer' });
-    const el =
-      document.getElementById(id) ||
-      (id === 'commercials' ? document.getElementById('commercial-works') : null) ||
-      (id === 'commercial-works' ? document.getElementById('commercials') : null);
+    const el = document.getElementById(id);
 
     if (el) {
       const navOffset = 80;
@@ -135,9 +132,8 @@ export const Footer: React.FC<FooterProps> = ({ settings, socialLinks = [] }) =>
             <div className="flex flex-col gap-2.5 text-[#8A877F]">
               {[
                 { id: 'home', label: 'Home' },
-                { id: 'commercials', label: 'Commercials' },
-                { id: 'services', label: 'Services' },
                 { id: 'portfolio', label: 'Portfolio' },
+                { id: 'services', label: 'Services' },
                 { id: 'about', label: 'About' },
                 { id: 'contact', label: 'Contact' },
               ].map((item) => (

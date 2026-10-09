@@ -5,12 +5,11 @@
  * Public Home Page (Stage 2)
  * Orchestrates the full filmic public website:
  * - Fixed Navbar (transparent to blur on scroll, active section highlight, mobile overlay)
- * - HeroSection (#home, 100svh, masked line-by-line reveal, 4:5 portrait, pointer spotlight)
+ * - HeroSection (#home, 100svh, masked line-by-line reveal, pointer spotlight)
  * - Marquee (infinite ticker of published services separated by KeyGlyph)
- * - AboutSection (#about, inverted Bone background, markdown 62ch measure, what I do tags)
- * - ServicesSection (#services, numbered list, desktop hover expand, mobile accordion)
  * - PortfolioSection (#portfolio, tabs, 2.39:1 featured card, video modal, image lightbox, reading rows, automation cases, empty state)
- * - ConnectSection (#connect, giant typographic social links)
+ * - ServicesSection (#services, numbered list, desktop hover expand, mobile accordion)
+ * - AboutSection (#about, inverted Bone background, markdown 62ch measure, what I do tags)
  * - ContactSection (#contact, rate-limited form with honeypot trap, Firestore messages write)
  * - Footer (giant clipped wordmark, metadata, navigation, copyright)
  * Skeleton loaders while initial data loads.
@@ -28,10 +27,9 @@ import {
   Navbar,
   HeroSection,
   Marquee,
-  CommercialVideoShowcase,
-  AboutSection,
-  ServicesSection,
   PortfolioSection,
+  ServicesSection,
+  AboutSection,
   ContactSection,
   Footer,
 } from '../components/public';
@@ -52,10 +50,7 @@ export default function Home() {
     if (window.location.hash) {
       const id = window.location.hash.replace('#', '');
       const timer = setTimeout(() => {
-        const el =
-          document.getElementById(id) ||
-          (id === 'commercials' ? document.getElementById('commercial-works') : null) ||
-          (id === 'commercial-works' ? document.getElementById('commercials') : null);
+        const el = document.getElementById(id);
         if (el) {
           const navOffset = 80;
           const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
@@ -104,23 +99,20 @@ export default function Home() {
         {/* 1. Cinematic Hero Section (#home) */}
         <HeroSection settings={settings} />
 
-        {/* 2. Featured Commercial Works & Video Showcase (#commercial-works) */}
-        <CommercialVideoShowcase />
-
-        {/* 3. Numbered Services Section (#services) */}
-        <ServicesSection services={services} />
-
-        {/* 4. Filtered Portfolio Section (#portfolio) — Includes full video work archive */}
+        {/* 2. Portfolio & Work Archive (#portfolio) — the director's full video archive */}
         <PortfolioSection
           works={works}
           categories={categories}
           whatsappNumber={settings.whatsappNumber}
         />
 
-        {/* 5. Director Profile & About Section (#about) — Moved towards the end */}
+        {/* 3. Numbered Services Section (#services) */}
+        <ServicesSection services={services} />
+
+        {/* 4. Director Profile & About Section (#about) */}
         <AboutSection settings={settings} services={services} />
 
-        {/* 6. Contact / Work With Me Section (#contact) */}
+        {/* 5. Contact / Work With Me Section (#contact) */}
         <ContactSection settings={settings} socialLinks={socialLinks} />
       </main>
 

@@ -100,7 +100,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ settings }) => {
       {/* 2. RESTRAINED EDITORIAL HERO CONTENT                      */}
       {/* ======================================================== */}
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-16 pt-32 sm:pt-40 pb-10 flex-1 flex flex-col justify-end">
-        <div className="max-w-3xl space-y-6 sm:space-y-8">
+        <div className="max-w-3xl space-y-3 sm:space-y-4">
           {/* Concise Positioning Statement */}
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -116,7 +116,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ settings }) => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-wrap items-center gap-4 pt-2"
+            className="flex flex-wrap items-center gap-4"
           >
             <Button
               variant="primary"

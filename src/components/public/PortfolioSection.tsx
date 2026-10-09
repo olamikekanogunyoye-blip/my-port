@@ -129,7 +129,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
               id="portfolio-chapter-title"
               className="font-mono text-xs uppercase tracking-[0.25em] text-[#C9A24D]"
             >
-              03 · PORTFOLIO & WORK ARCHIVE
+              02 · PORTFOLIO & WORK ARCHIVE
             </span>
             <span className="font-mono text-xs text-[#8A877F] uppercase tracking-wider">
               Film • Visuals • Automations

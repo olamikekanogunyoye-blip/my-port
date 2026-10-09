@@ -54,7 +54,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ services }) =>
               id="services-chapter-title"
               className="font-mono text-xs uppercase tracking-[0.25em] text-[#C9A24D]"
             >
-              02 · SERVICES & CAPABILITIES
+              03 · SERVICES & CAPABILITIES
             </span>
             <span className="font-mono text-xs text-[#8A877F] uppercase tracking-wider">
               {sortedServices.length} Specialized Practices
