@@ -6,7 +6,7 @@
  * - Full-bleed background video from YouTube (WXWKOF0NxN4)
  * - Muted, autoplaying, looping, no player controls, pointer-events-none
  * - Layered dark cinematic overlays & vignettes for pristine typography contrast
- * - Restrained, authoritative brand hierarchy: KEY OF DAVID / Olamilekan Ogunyoye David
+ * - Brand name, owner name and role kicker intentionally omitted from the hero
  * - Concise creative positioning statement
  * - Dual direct CTAs: "View My Work" & "Work With Me"
  * - No portrait in hero (repositioned into About section)
@@ -42,9 +42,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ settings }) => {
     }
   };
 
-  const ownerName = settings.ownerName || 'Olamilekan Ogunyoye David';
-  const roleTitle = settings.title || 'Creative AI Creator & AI Automation Agent';
-  const brandName = settings.brandName || 'KEY OF DAVID';
   const heroIntro =
     settings.heroIntro ||
     'Crafting high-retention AI cinema and building autonomous workflows that give businesses their time back.';
@@ -65,7 +62,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ settings }) => {
           onError={(e) => {
             (e.currentTarget as HTMLImageElement).src = 'https://img.youtube.com/vi/WXWKOF0NxN4/hqdefault.jpg';
           }}
-          alt="KEY OF DAVID Reel Background"
+          alt="Background showreel"
           className="absolute inset-0 w-full h-full object-cover object-center filter brightness-50"
           loading="eager"
         />
@@ -73,7 +70,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ settings }) => {
         {/* 16:9 Aspect Cropped Iframe covering full viewport across all ratios */}
         <iframe
           src="https://www.youtube-nocookie.com/embed/WXWKOF0NxN4?autoplay=1&mute=1&controls=0&loop=1&playlist=WXWKOF0NxN4&playsinline=1&rel=0&modestbranding=1&disablekb=1&fs=0&iv_load_policy=3&showinfo=0"
-          title="KEY OF DAVID Background Reel"
+          title="Background Reel"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           className="absolute top-1/2 left-1/2 w-[177.78vh] min-w-full h-[56.25vw] min-h-full -translate-x-1/2 -translate-y-1/2 pointer-events-none border-0"
           tabIndex={-1}
@@ -102,42 +99,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ settings }) => {
       {/* ======================================================== */}
       {/* 2. RESTRAINED EDITORIAL HERO CONTENT                      */}
       {/* ======================================================== */}
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-16 pt-32 sm:pt-40 pb-12 flex-1 flex flex-col justify-center">
-        <div className="max-w-3xl space-y-6 sm:space-y-8">
-          {/* Subtle Category Kicker */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="flex items-center gap-3"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#C9A24D]" />
-            <span className="font-mono text-[11px] sm:text-xs uppercase tracking-[0.24em] text-[#C9A24D] font-medium">
-              {roleTitle}
-            </span>
-          </motion.div>
-
-          {/* Brand Name & Identity Heading */}
-          <div className="space-y-2">
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight uppercase text-[#F1EEE6] font-sans leading-[1.05]"
-            >
-              {brandName}
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="font-mono text-xs sm:text-sm uppercase tracking-[0.2em] text-[#8A877F]"
-            >
-              {ownerName}
-            </motion.p>
-          </div>
-
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-16 pt-32 sm:pt-40 pb-10 flex-1 flex flex-col justify-end">
+        <div className="max-w-3xl space-y-3 sm:space-y-4">
           {/* Concise Positioning Statement */}
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -153,7 +116,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ settings }) => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-wrap items-center gap-4 pt-2"
+            className="flex flex-wrap items-center gap-4"
           >
             <Button
               variant="primary"
@@ -211,4 +174,3 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ settings }) => {
     </section>
   );
 };
-

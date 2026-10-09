@@ -217,26 +217,6 @@ export const DEFAULT_SOCIAL_LINKS: Omit<SocialLinkItem, 'id'>[] = [
 
 export const DEFAULT_WORKS: WorkItem[] = [
   {
-    id: 'work_1',
-    type: 'video',
-    title: 'KEY OF DAVID — Director Showcase Reel',
-    slug: 'key-of-david-director-reel',
-    description: 'Master creative direction reel showcasing high-retention generative motion, 4K camera blocking, and bespoke audio pacing.',
-    categoryId: 'cat_1',
-    thumbnailUrl: 'https://img.youtube.com/vi/WXWKOF0NxN4/maxresdefault.jpg',
-    thumbnailPath: '',
-    mediaUrl: 'https://www.youtube.com/watch?v=WXWKOF0NxN4',
-    mediaPath: '',
-    tools: ['Runway Gen-3', 'Midjourney v6.1', 'Premiere Pro', 'DaVinci Resolve'],
-    allowDownload: false,
-    featured: true,
-    isSample: false,
-    order: 1,
-    published: true,
-    createdAt: '2026-01-01T00:00:00.000Z',
-    updatedAt: '2026-01-01T00:00:00.000Z',
-  },
-  {
     id: 'work_2',
     type: 'video',
     title: 'Kinetic Spec Reel — High Pacing Edit',
@@ -660,6 +640,8 @@ export function subscribeToWorks(
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.WORKS);
       let items: WorkItem[] = stored ? JSON.parse(stored) : [];
+      // Legacy cleanup: the retired "KEY OF DAVID" showcase reel is no longer part of the archive
+      items = items.filter((w) => w.slug !== 'key-of-david-director-reel');
       if (!items || items.length === 0) {
         items = DEFAULT_WORKS;
         localStorage.setItem(STORAGE_KEYS.WORKS, JSON.stringify(DEFAULT_WORKS));

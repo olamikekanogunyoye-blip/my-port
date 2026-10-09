@@ -28,9 +28,8 @@ interface NavbarProps {
 
 const NAV_ITEMS = [
   { id: 'home', label: 'Home' },
-  { id: 'commercials', label: 'Commercials' },
-  { id: 'services', label: 'Services' },
   { id: 'portfolio', label: 'Portfolio' },
+  { id: 'services', label: 'Services' },
   { id: 'about', label: 'About' },
   { id: 'contact', label: 'Contact' },
 ];
@@ -50,12 +49,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       setIsScrolled(window.scrollY > 40);
 
       // Detect active section based on scroll position
-      const sections = NAV_ITEMS.map((item) => {
-        return (
-          document.getElementById(item.id) ||
-          (item.id === 'commercials' ? document.getElementById('commercial-works') : null)
-        );
-      });
+      const sections = NAV_ITEMS.map((item) => document.getElementById(item.id));
       const scrollPos = window.scrollY + 200;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -76,10 +70,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     setMobileMenuOpen(false);
     logAnalyticsEvent('navigate_section', { section: id });
 
-    const element =
-      document.getElementById(id) ||
-      (id === 'commercials' ? document.getElementById('commercial-works') : null) ||
-      (id === 'commercial-works' ? document.getElementById('commercials') : null);
+    const element = document.getElementById(id);
 
     if (element) {
       const navOffset = 80;

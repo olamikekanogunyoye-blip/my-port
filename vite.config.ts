@@ -4,8 +4,13 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
+  const isBase44Preview = process.env.BASE44_PREVIEW_MODE === '1';
   return {
     plugins: [react(), tailwindcss()],
+    // Base44 sandbox preview exposes the platform flag to client code so
+    // src/lib/firebase.ts can fall back to the built-in localStorage store.
+    // Unset/other values keep Vite's default `VITE_` prefix.
+    envPrefix: isBase44Preview ? ['VITE_', 'BASE44_'] : 'VITE_',
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
