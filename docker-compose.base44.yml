@@ -28,6 +28,9 @@ services:
       - __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS
       # Bind mounts on macOS/Windows hosts often don't emit fs events; poll so HMR fires.
       - CHOKIDAR_USEPOLLING=true
+      # Silences Vite's cosmetic "(configLoader: native)" warning about the repo's
+      # pre-existing `__dirname` usage in vite.config.ts. Behavior is unaffected.
+      - VITE_CONFIG_NATIVE_IGNORE_WARNING=true
     healthcheck:
       test:
         [
