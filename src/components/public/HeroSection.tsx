@@ -99,7 +99,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ settings }) => {
       {/* ======================================================== */}
       {/* 2. RESTRAINED EDITORIAL HERO CONTENT                      */}
       {/* ======================================================== */}
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-16 pt-32 sm:pt-40 pb-12 flex-1 flex flex-col justify-center">
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-16 pt-32 sm:pt-40 pb-10 flex-1 flex flex-col justify-end">
         <div className="max-w-3xl space-y-6 sm:space-y-8">
           {/* Concise Positioning Statement */}
           <motion.p

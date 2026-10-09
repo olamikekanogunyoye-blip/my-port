@@ -2,18 +2,18 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
  * 
- * Commercial Video Showcase Component
- * "SELECTED COMMERCIAL WORKS // AI SPEC ADS"
- * - Broadcast-quality 9:16 vertical card grid (aspect-[9/16])
+ * Video Showcase Component
+ * "SELECTED WORKS"
+ * - Clean 16:9 widescreen card grid (aspect-video, no numbering or aspect-ratio tags)
  * - Responsive 3-column layout (collapsing to 2 cols on tablet, 1 on mobile)
  * - Frosted glass containers (bg-zinc-950/80 backdrop-blur-md border border-white/10 rounded-2xl)
- * - Interactive desktop lift: hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-cyan-500/10
+ * - Interactive desktop lift: hover:-translate-y-1.5 hover:shadow-2xl
  * - Inline responsive iframe activation + Theater Modal player
- * - 9 exact commercial productions with direct shorts links and metadata
+ * - 9 video productions with direct links and metadata
  */
 
 import React, { useState } from 'react';
-import { Play, ArrowUpRight, X, Sparkles, Film, Maximize2, RotateCcw } from 'lucide-react';
+import { Play, ArrowUpRight, X, Film } from 'lucide-react';
 import { Reveal } from '../ui/Reveal';
 import { motion, AnimatePresence } from 'motion/react';
 import { logAnalyticsEvent } from '../../lib/firebase';
@@ -162,18 +162,12 @@ export const CommercialVideoShowcase: React.FC = () => {
         <Reveal direction="up">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 mb-12 border-b border-white/[0.08]">
             <div>
-              {/* Wide-Tracked Subtitle Kicker */}
-              <div className="flex items-center gap-2 mb-3 font-mono text-xs text-[#C9A24D] uppercase tracking-[0.22em] font-medium">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#C9A24D]" />
-                <span>01 · COMMERCIAL REELS · SPEC ADS</span>
-              </div>
-
               {/* High-Contrast Main Heading */}
               <h2
                 id="commercial-showcase-title"
                 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#F1EEE6] tracking-tight uppercase font-sans"
               >
-                Selected Commercial Works
+                Selected Works
               </h2>
 
               <p className="text-[#8A877F] text-sm sm:text-base mt-2 max-w-2xl font-light">
@@ -191,7 +185,7 @@ export const CommercialVideoShowcase: React.FC = () => {
                     : 'text-[#8A877F] hover:text-[#F1EEE6]'
                 }`}
               >
-                All Reels ({COMMERCIAL_VIDEOS.length})
+                All ({COMMERCIAL_VIDEOS.length})
               </button>
               <button
                 onClick={() => setActiveFilter('commercial')}
@@ -201,7 +195,7 @@ export const CommercialVideoShowcase: React.FC = () => {
                     : 'text-[#8A877F] hover:text-[#F1EEE6]'
                 }`}
               >
-                Spec Ads
+                Commercial
               </button>
               <button
                 onClick={() => setActiveFilter('cinema')}
@@ -221,14 +215,14 @@ export const CommercialVideoShowcase: React.FC = () => {
                     : 'text-[#8A877F] hover:text-[#F1EEE6]'
                 }`}
               >
-                Gen-Cuts
+                Generative
               </button>
             </div>
           </div>
         </Reveal>
 
         {/* ======================================================== */}
-        {/* 9:16 VERTICAL COMMERCIAL VIDEO GRID (3 Columns)          */}
+        {/* 16:9 WIDESCREEN VIDEO GRID (3 Columns)                   */}
         {/* ======================================================== */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredReels.map((reel, index) => {
@@ -241,18 +235,8 @@ export const CommercialVideoShowcase: React.FC = () => {
                   className="group relative bg-[#0c0d12]/90 backdrop-blur-md border border-white/[0.08] rounded-xl overflow-hidden hover:border-white/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/70 flex flex-col"
                   style={{ willChange: 'transform' }}
                 >
-                  {/* Top Bar inside Card */}
-                  <div className="px-4 py-3 border-b border-white/[0.06] bg-black/40 flex items-center justify-between font-mono text-[11px] text-zinc-400">
-                    <span className="text-zinc-300 font-semibold tracking-wider">
-                      REEL 0{index + 1}
-                    </span>
-                    <span className="text-[10px] text-zinc-500 uppercase tracking-widest">
-                      9:16 VERTICAL
-                    </span>
-                  </div>
-
-                  {/* 9:16 Vertical Container */}
-                  <div className="relative aspect-[9/16] w-full bg-[#08080a] overflow-hidden">
+                  {/* 16:9 Widescreen Container */}
+                  <div className="relative aspect-video w-full bg-[#08080a] overflow-hidden">
                     {isPlayingInline ? (
                       /* Active Responsive YouTube Embed */
                       <div className="relative w-full h-full">
@@ -269,7 +253,7 @@ export const CommercialVideoShowcase: React.FC = () => {
                           onClick={handleStopInline}
                           className="absolute top-3 right-3 z-30 p-2 rounded-full bg-black/80 hover:bg-black text-white border border-white/20 transition-all cursor-pointer"
                           aria-label="Stop playback"
-                          title="Reset reel"
+                          title="Reset video"
                         >
                           <X size={14} />
                         </button>
@@ -294,16 +278,6 @@ export const CommercialVideoShowcase: React.FC = () => {
                           aria-hidden="true"
                         />
 
-                        {/* Top Overlay Badge */}
-                        <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between z-10 pointer-events-none font-mono text-[10px] text-[#F1EEE6]/80">
-                          <span className="bg-black/60 px-2.5 py-1 rounded border border-white/10 backdrop-blur-sm tracking-wider uppercase">
-                            4K DCI
-                          </span>
-                          <span className="bg-black/60 px-2.5 py-1 rounded border border-white/10 backdrop-blur-sm tracking-wider uppercase text-[#8A877F]">
-                            CINEMA
-                          </span>
-                        </div>
-
                         {/* Center Play Button */}
                         <div className="absolute inset-0 flex items-center justify-center z-10">
                           <div className="w-14 h-14 rounded-full bg-black/70 group-hover:bg-[#C9A24D] border border-white/20 group-hover:border-[#C9A24D] text-white group-hover:text-black flex items-center justify-center transition-all duration-300 group-hover:scale-105 shadow-xl">
@@ -314,7 +288,7 @@ export const CommercialVideoShowcase: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Bottom Project Metadata & "Watch Reel ↗" prompt */}
+                  {/* Bottom Project Metadata & "Watch Video ↗" prompt */}
                   <div className="p-4 bg-[#0a0a0d]/95 border-t border-white/[0.06] flex flex-col justify-between gap-3">
                     <div>
                       {/* Project Category Label */}
@@ -330,24 +304,24 @@ export const CommercialVideoShowcase: React.FC = () => {
                       </p>
                     </div>
 
-                    {/* Action Prompts: Inline Play + Direct YouTube Shorts Link */}
+                    {/* Action Prompts: Inline Play + Direct YouTube Link */}
                     <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between">
                       <button
                         onClick={() => handlePlayInline(reel.id)}
                         className="font-mono text-xs text-zinc-300 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer"
                       >
                         <Play size={12} className="fill-current text-[#C9A24D]" />
-                        <span>{isPlayingInline ? 'Playing Reel' : 'Play In-Place'}</span>
+                        <span>{isPlayingInline ? 'Playing' : 'Play'}</span>
                       </button>
 
                       <a
                         href={reel.directUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`Watch ${reel.title} on YouTube Shorts`}
+                        aria-label={`Watch ${reel.title} on YouTube`}
                         className="font-mono text-xs text-zinc-400 hover:text-[#C9A24D] flex items-center gap-1 transition-colors group/link"
                       >
-                        <span>Watch Reel</span>
+                        <span>Watch Video</span>
                         <ArrowUpRight size={13} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                       </a>
                     </div>
@@ -367,7 +341,7 @@ export const CommercialVideoShowcase: React.FC = () => {
               </div>
               <div>
                 <h4 className="font-bold text-[#F1EEE6] text-base tracking-tight font-sans">
-                  Need a Bespoke Spec Commercial or AI Director Reel?
+                  Need a Bespoke Commercial or AI Video?
                 </h4>
                 <p className="text-[#8A877F] text-xs sm:text-sm font-light mt-0.5">
                   Full generative production from concept and prompt architecture to 4K color grade.
@@ -382,7 +356,7 @@ export const CommercialVideoShowcase: React.FC = () => {
                 rel="noopener noreferrer"
                 className="flex-1 sm:flex-initial px-5 py-2.5 rounded bg-transparent hover:bg-white/[0.04] text-[#F1EEE6] border border-white/15 font-mono text-xs uppercase tracking-wider text-center transition-all"
               >
-                All Shorts ↗
+                All Videos ↗
               </a>
               <a
                 href="#contact"
@@ -409,7 +383,7 @@ export const CommercialVideoShowcase: React.FC = () => {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="relative w-full max-w-md aspect-[9/16] bg-black rounded-2xl overflow-hidden border border-white/20 shadow-2xl"
+              className="relative w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden border border-white/20 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <button
